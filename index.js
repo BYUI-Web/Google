@@ -27,32 +27,44 @@ app.post("/google", function (req, res) {
         res.end();
     }
 
+    var responseObj;
 
-    // Google actions V1 - not working anymore
-    /*
-    var response = {
-        speech: "Hello, what is that?",
-        displayText: "I couldn't understad",
-        source: "action-skill-byui"
-    };
-    */
+    // console.log("here 0");
 
-    //Default response from the webhook to show it’s working
-    response = "This is a sample response from your webhook!";
+    if (req.body.queryResult.parameters.intent == 'tuition-cost') {
 
-    responseObj = {
-        "fulfillmentText": response
-        , "fulfillmentMessages": [
-            {
-                "text": {
-                    "text": [
-                        "Hello I m Responding to intent"
-                    ]
+        // console.log("here 1");
+
+        tuition_non_lds = 4118;
+        tuition_lds = 2059;
+
+        response_general = `Tuition cost ${tuition_non_lds} dollars for non-members of the church of Jesus Christ, and ${tuition_lds} dollars per semester for members.`;
+        response_lds = `The cost of tuition is ${tuition_lds} dollars per semester for members of the church of Jesus Christ.`;
+        response_non_lds = `The cost of tuition is ${tuition_non_lds} dollars for non-members of the church of Jesus Christ`;
+
+        response = (req.body.queryResult.parameters.lds_membership ? (req.body.queryResult.parameters.lds_membership == 'membership.non-lds' ? response_non_lds : response_lds) : response_general);
+        
+        // console.log("here 2", req.body.queryResult.parameters.lds_membership);
+        
+        responseObj = {
+            "fulfillmentText": response
+            ,
+            "fulfillmentMessages": [
+                {
+                    "text": {
+                        "text": [
+                            response
+                        ]
+                    }
                 }
-            }
-        ]
-        , "source": "action-skill-byui"
+            ],
+            "source": "action-skill-byui"
+        }
+
     }
+
+    // console.log("Request: ", req.body);
+
     res.json(responseObj);
 
     res.end();
