@@ -27,14 +27,33 @@ app.post("/google", function (req, res) {
         res.end();
     }
 
+
+    // Google actions V1 - not working anymore
+    /*
     var response = {
         speech: "Hello, what is that?",
         displayText: "I couldn't understad",
         source: "action-skill-byui"
     };
+    */
 
-    console.log(response);
+    //Default response from the webhook to show it’s working
+    response = "This is a sample response from your webhook!";
 
-    res.json(response);
+    responseObj = {
+        "fulfillmentText": response
+        , "fulfillmentMessages": [
+            {
+                "text": {
+                    "text": [
+                        "Hello I m Responding to intent"
+                    ]
+                }
+            }
+        ]
+        , "source": "action-skill-byui"
+    }
+    res.json(responseObj);
+
     res.end();
 });
