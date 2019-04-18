@@ -32,6 +32,8 @@ app.post("/google", function (req, res) {
         data: req.body
     };
 
+    console.log(response);
+
     res.json(response);
     res.end();
 });
