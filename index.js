@@ -28,8 +28,9 @@ app.post("/google", function (req, res) {
     }
 
     var response = {
-        success: true,
-        data: req.body
+        speech: "Hello, what is that?",
+        displayText: "I couldn't understad",
+        source: "action-skill-byui"
     };
 
     console.log(response);
