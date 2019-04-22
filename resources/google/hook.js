@@ -35,11 +35,15 @@ function objectResponse(response) {
             {
                 "text": {
                     "text": [response.reader]
-                },
-                // "LinkOutSuggestion": {
-                //     "destinationName": "BYU-Idaho Cost of Attendance",
-                //     "uri": "http://www.byui.edu/financial-aid/cost-of-attendance"
-                // },
+                }
+            },
+            {
+                "LinkOutSuggestion": {
+                    "destinationName": "BYU-Idaho Cost of Attendance",
+                    "uri": "http://www.byui.edu/financial-aid/cost-of-attendance"
+                }
+            },
+            {
                 "image": {
                     "imageUri": "http://www.byui.edu/a/80408",
                     "accessibilityText": ""
