@@ -17,55 +17,37 @@ app.listen(PORT, function () {
 
 
 app.get("/", function (req, res) {
-    res.json({ success: true });
+    res.status(404);
+    res.end();
+});
+
+
+app.get("/ping", function (req, res) {
+    var today = new Date();
+    var response = {
+        success: true,
+        date_time: {
+            miliseconds: today.getTime(),
+            utc: today.toUTCString(),
+            local: today.toLocaleDateString("en-US", { timeZone: 'America/Denver' }) + ' ' + today.toLocaleTimeString("en-US", { timeZone: 'America/Denver' })
+        }
+    };
+
+    res.json(response);
     res.end();
 });
 
 app.post("/google", function (req, res) {
     if (!req.body) {
-        res.sendStatus(400);
+        res.sendStatus(403);
         res.end();
     }
 
-    var responseObj;
+    var hook = require('./resources/google/hook');
 
-    // console.log("here 0");
+    response = hook.getAppropriateAnswer(req.body.queryResult);
 
-    if (req.body.queryResult.parameters.intent == 'tuition-cost') {
-
-        // console.log("here 1");
-
-        tuition_non_lds = 4118;
-        tuition_lds = 2059;
-
-        response_general = `Tuition cost ${tuition_non_lds} dollars for non-members of the church of Jesus Christ, and ${tuition_lds} dollars per semester for members.`;
-        response_lds = `The cost of tuition is ${tuition_lds} dollars per semester for members of the church of Jesus Christ.`;
-        response_non_lds = `The cost of tuition is ${tuition_non_lds} dollars for non-members of the church of Jesus Christ`;
-
-        response = (req.body.queryResult.parameters.lds_membership ? (req.body.queryResult.parameters.lds_membership == 'membership.non-lds' ? response_non_lds : response_lds) : response_general);
-        
-        // console.log("here 2", req.body.queryResult.parameters.lds_membership);
-        
-        responseObj = {
-            "fulfillmentText": response
-            ,
-            "fulfillmentMessages": [
-                {
-                    "text": {
-                        "text": [
-                            response
-                        ]
-                    }
-                }
-            ],
-            "source": "action-skill-byui"
-        }
-
-    }
-
-    // console.log("Request: ", req.body);
-
-    res.json(responseObj);
+    res.json(response);
 
     res.end();
 });
