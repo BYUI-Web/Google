@@ -17,7 +17,23 @@ app.listen(PORT, function () {
 
 
 app.get("/", function (req, res) {
-    res.json({ success: true });
+    res.status(404);
+    res.end();
+});
+
+
+app.get("/ping", function (req, res) {
+    var today = new Date();
+    var response = {
+        success: true,
+        date_time:{
+            miliseconds: today.getTime(),
+            utc: today.toUTCString(),
+            local: today.toLocaleDateString("en-US",{timeZone:'America/Denver'}) + ' ' +  today.toLocaleTimeString("en-US",{timeZone:'America/Denver'})
+        }
+    };
+
+    res.json(response);
     res.end();
 });
 
