@@ -12,11 +12,11 @@ exports.getAppropriateAnswer = function (incomingIntent, callback = undefined) {
 
         response = {};
 
-        response_general = `Tuition cost ${TUITION_NON_LDS} dollars for non-members of the church of Jesus Christ, and ${TUITION_LDS} dollars per semester for members.`;
-        response_lds = `The cost of tuition is ${TUITION_LDS} dollars per semester for members of the church of Jesus Christ.`;
-        response_non_lds = `The cost of tuition is ${TUITION_NON_LDS} dollars for non-members of the church of Jesus Christ`;
+        response_general = `Tuition cost \$${TUITION_NON_LDS} for non-members of the church of Jesus Christ, and \$${TUITION_LDS} per semester for members.`;
+        response_lds = `The cost of tuition is \$${TUITION_LDS} per semester for members of the church of Jesus Christ.`;
+        response_non_lds = `The cost of tuition is \$${TUITION_NON_LDS} for non-members of the church of Jesus Christ`;
 
-        response.text = `Tuition cost \$${TUITION_NON_LDS} dollars for non-members of the church of Jesus Christ, and \$${TUITION_LDS} dollars per semester for members.`;
+        response.text = `Tuition cost \$${TUITION_NON_LDS} for non-members of the church of Jesus Christ, and \$${TUITION_LDS} per semester for members.`;
         response.reader = (incomingIntent.parameters.lds_membership ? (incomingIntent.parameters.lds_membership == 'membership.non-lds' ? response_non_lds : response_lds) : response_general);
 
         responseObj = objectResponse(response);
@@ -37,12 +37,6 @@ function objectResponse(response) {
                     "text": [response.reader]
                 }
             },
-            // {
-            //     "LinkOutSuggestion": {
-            //         "destinationName": "BYU-Idaho Cost of Attendance",
-            //         "uri": "http://www.byui.edu/financial-aid/cost-of-attendance"
-            //     }
-            // },
             {
                 "image": {
                     "imageUri": "http://www.byui.edu/a/80408",
