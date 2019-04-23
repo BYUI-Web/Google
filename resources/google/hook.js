@@ -29,6 +29,13 @@ exports.getAppropriateAnswer = function (incomingIntent, callback = undefined) {
 }
 
 function objectResponse(response) {
+    if (!response.text) {
+        return false;
+    }
+    responseObj = {};
+    responseObj.fulfillmentText = response.text;
+    responseObj.fulfillmentMessages = [];
+
     responseObj = {
         "fulfillmentText": response.text,
         "fulfillmentMessages": [
@@ -41,6 +48,16 @@ function objectResponse(response) {
                 "image": {
                     "imageUri": "http://www.byui.edu/a/80408",
                     "accessibilityText": ""
+                }
+            },
+            {
+                "quickReplies": {
+                    "title": "Suggested replies",
+                    "quickReplies": [
+                        "See more details",
+                        "Call financial aid",
+                        "Cancel"
+                    ]
                 }
             }
         ],
