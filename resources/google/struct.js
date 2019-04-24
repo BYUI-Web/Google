@@ -3,7 +3,9 @@
  * @param {string[]} text The collection of the agent's responses
  */
 function Text(text) {
-    this.text = text;
+    this.text = {
+        text
+    };
 }
 
 /**
