@@ -3,13 +3,17 @@ function Text(text = [""]) {
 }
 
 function ImageObj(imageUri = "", accessibilityText = "") {
-    this.imageUri = imageUri,
-        this.accessibilityText = accessibilityText;
+    this.image = {
+        imageUri,
+        accessibilityText
+    };
 }
 
 function QuickReplies(title = "", quickReplies = [""]) {
-    this.title = title,
-        this.quickReplies = quickReplies;
+    this.quickReplies = {
+        title,
+        quickReplies
+    };
 }
 
 function Button(text = "", postback = "") {
@@ -18,9 +22,11 @@ function Button(text = "", postback = "") {
 }
 
 function Card(title = "", subtitle = "", imageUri = "", buttons = [new Button()]) {
-    this.title = title,
-        this.imageUri = imageUri,
-        this.buttons = buttons;
+    this.card = {
+        title,
+        imageUri,
+        buttons
+    };
 }
 
 function SelectItemInfo(key = "", synonyms = [""]) {
@@ -36,15 +42,28 @@ function Item(info = new SelectItemInfo(), title = "", description = "", image =
 }
 
 function ListSelect(title = "", items = [new Item()]) {
-    this.title = title,
-        this.items = items;
+    this.listSelect = {
+        title,
+        items
+    };
 }
 
 function CarouselSelect(items = [new Item()]) {
-    this.items = items;
+    this.carouselSelect = {
+        items
+    };
 }
 
-function ResponseObject(fulfillmentText = "", textObject = new Text(), imageObject = new ImageObj(), quickRepliesObject = new QuickReplies(), cardObject = new Card(), listSelectObject = new ListSelect(), carouselSelectObject = new CarouselSelect()) {
+/**
+ * @param {string} fulfillmentText Fulfilment Text is the text Google will display in the screen
+ * @param {Text} textObject Array of sentences the voice could say
+ * @param {ImageObj} imageObject ImageObj Object if desired to diplay an image
+ * @param {QuickReplies} quickRepliesObject Object of possible quick responses
+ * @param {Card} cardObject Card Object if desired to display more cards 
+ * @param {ListSelect} listSelectObject ListSelect Object if desired to display a list to select from
+ * @param {CarouselSelect} carouselSelectObject CarouselSelect Object if desired to display a carousel with options to select
+*/
+function ResponseObject(fulfillmentText, textObject, imageObject = undefined, quickRepliesObject = undefined, cardObject = undefined, listSelectObject = undefined, carouselSelectObject = undefined) {
     this.fulfillmentText = fulfillmentText,
         this.fulfillmentMessages = [
             textObject,
@@ -52,7 +71,11 @@ function ResponseObject(fulfillmentText = "", textObject = new Text(), imageObje
             quickRepliesObject,
             cardObject,
             listSelectObject,
-            carouselSelectObject
+            carouselSelectObject,
         ],
         this.source = "action-skill-byui";
+
+    this.fulfillmentMessages = this.fulfillmentMessages.filter(function (element) {
+        return element != null;
+    });
 }
