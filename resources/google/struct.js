@@ -79,3 +79,16 @@ function ResponseObject(fulfillmentText, textObject, imageObject = undefined, qu
         return element != null;
     });
 }
+
+module.exports = {
+    Text,
+    ImageObj,
+    QuickReplies,
+    Button,
+    Card,
+    SelectItemInfo,
+    Item,
+    ListSelect,
+    CarouselSelect,
+    ResponseObject
+};

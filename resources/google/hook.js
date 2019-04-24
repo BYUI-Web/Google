@@ -19,7 +19,7 @@ exports.getAppropriateAnswer = function (incomingIntent, callback = undefined) {
         response.text = `Tuition cost \$${TUITION_NON_LDS} for non-members of the church of Jesus Christ, and \$${TUITION_LDS} per semester for members.`;
         response.reader = (incomingIntent.parameters.lds_membership ? (incomingIntent.parameters.lds_membership == 'membership.non-lds' ? response_non_lds : response_lds) : response_general);
 
-        responseObj = objectResponse(response);
+        // responseObj = objectResponse(response);
     }
     if (callback) {
         callback(responseObj);
