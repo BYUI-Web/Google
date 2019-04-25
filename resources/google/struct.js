@@ -49,10 +49,10 @@ function Button(text = "", postback = "") {
  * @param {string} imageUri The public URI to an image file for the card
  * @param {Button[]} buttons The collection of card buttons
  */
-function Card(title = "", subtitle = "", imageUri = "", buttons = [new Button()]) {
+function Card(title = "", subtitle = "", image = new ImageObj(), buttons = [new Button()]) {
     this.card = {
         title,
-        imageUri,
+        imageUri: image.image.imageUri,
         buttons
     };
 }
