@@ -112,7 +112,7 @@ function CarouselSelect(items) {
  * @param {ListSelect} listSelectObject The card for presenting a list of options to select from
  * @param {CarouselSelect} carouselSelectObject The card for presenting a carousel of options to select from
 */
-function ResponseObject(fulfillmentText, textObject = undefined, imageObject = undefined, quickRepliesObject = undefined, cardObject = undefined, listSelectObject = undefined, carouselSelectObject = undefined) {
+function ResponseObject({fulfillmentText = undefined, textObject = undefined, imageObject = undefined, quickRepliesObject = undefined, cardObject = undefined, listSelectObject = undefined, carouselSelectObject = undefined} = {}) {
     this.fulfillmentText = fulfillmentText,
         this.fulfillmentMessages = [
             textObject,
