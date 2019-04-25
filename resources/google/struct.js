@@ -49,10 +49,10 @@ function Button(text = "", postback = "") {
  * @param {string} imageUri The public URI to an image file for the card
  * @param {Button[]} buttons The collection of card buttons
  */
-function Card(title = "", subtitle = "", imageUri = "", buttons = [new Button()]) {
+function Card(title = "", subtitle = "", image = new ImageObj(), buttons = [new Button()]) {
     this.card = {
         title,
-        imageUri,
+        imageUri: image.image.imageUri,
         buttons
     };
 }
@@ -112,7 +112,7 @@ function CarouselSelect(items) {
  * @param {ListSelect} listSelectObject The card for presenting a list of options to select from
  * @param {CarouselSelect} carouselSelectObject The card for presenting a carousel of options to select from
 */
-function ResponseObject(fulfillmentText, textObject = undefined, imageObject = undefined, quickRepliesObject = undefined, cardObject = undefined, listSelectObject = undefined, carouselSelectObject = undefined) {
+function ResponseObject({fulfillmentText = undefined, textObject = undefined, imageObject = undefined, quickRepliesObject = undefined, cardObject = undefined, listSelectObject = undefined, carouselSelectObject = undefined} = {}) {
     this.fulfillmentText = fulfillmentText,
         this.fulfillmentMessages = [
             textObject,
