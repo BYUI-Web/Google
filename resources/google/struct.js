@@ -78,7 +78,7 @@ function Item(info, title, description = "", image = new ImageObj()) {
     this.info = info,
         this.title = title,
         this.description = description,
-        this.image = image;
+        this.image = image.image;
 }
 
 /**
